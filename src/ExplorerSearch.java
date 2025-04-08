@@ -41,7 +41,36 @@ public class ExplorerSearch {
      * @return the number of spaces the explorer can reach
      */
     public static int reachableArea(int[][] island) {
-        return -1;
+        int[] start = explorerCoordinates(island);
+        boolean[][] visited = new boolean[island.length][island[0].length];
+        return reachableArea(island, start, visited);
+    }
+    
+    public static int reachableArea(int[][] island, int[] current, boolean[][] visited) {
+        // current position
+        int currRow = current[0];
+        int currCol = current[1];
+
+        // base cases:
+        // out of bounds
+        if (currRow < 0 || currRow >= island.length || currCol < 0 || currCol >= island[0].length) return 0;
+        // impassable tile
+        if (island[currRow][currCol] == 2 || island[currRow][currCol] == 3) return 0;
+        // avoid revisiting/cycle
+        if (visited[currRow][currCol]) return 0;
+
+        // mark current tile as visited
+        visited[currRow][currCol] = true;
+
+        int moveCount = 1;
+
+        // recurse
+        List<int[]> moves = possibleMoves(island, current);
+        for (int[] move : moves) {
+            moveCount += reachableArea(island, move, visited);
+        }
+
+        return moveCount;
     }
 
     public static int[] explorerCoordinates(int[][] island) {
