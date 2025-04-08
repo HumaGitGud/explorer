@@ -3,6 +3,18 @@ import java.util.List;
 
 public class ExplorerSearch {
 
+    public static void main(String[] args) {
+        // total path tiles = 11
+        // total available tiles = 9
+        int[][] island = {
+            {0, 1, 2, 1, 2},
+            {1, 3, 3, 1, 2},
+            {1, 1, 2, 2, 2},
+            {3, 1, 1, 1, 1},
+            {3, 3, 3, 2, 1}
+        };
+    }
+
     /**
      * Returns how much land area an explorer can reach on a rectangular island.
      * 
@@ -29,9 +41,18 @@ public class ExplorerSearch {
      * @return the number of spaces the explorer can reach
      */
     public static int reachableArea(int[][] island) {
-        // Implement your method here!
-        // Please also make more test cases
-        // I STRONGLY RECOMMEND testing some helpers you might make too
         return -1;
+    }
+
+    public static int[] explorerCoordinates(int[][] island) {
+        for(int r = 0; r < island.length; r++) {
+            for (int c = 0; c < island[0].length; c++) {
+                if (island[r][c] == 0) {
+                    return new int[]{r, c};
+                }
+            }
+        }
+
+        throw new IllegalArgumentException("Explorer not found");
     }
 }
