@@ -55,4 +55,41 @@ public class ExplorerSearch {
 
         throw new IllegalArgumentException("Explorer not found");
     }
+
+    public static List<int[]> possibleMoves(int[][] island, int[] current) {
+        int curRow = current[0];
+        int curCol = current[1];
+
+        List<int[]> moves = new ArrayList<>();
+
+        // UP
+        int newRow = curRow - 1;
+        int newCol = curCol;
+        if (newRow >= 0 && island[newRow][newCol] != 2 && island[newRow][newCol] != 3) {
+            moves.add(new int[]{newRow, newCol});
+        }
+
+        // DOWN
+        newRow = curRow + 1;
+        newCol = curCol;
+        if (newRow < island.length && island[newRow][newCol] != 2 && island[newRow][newCol] != 3) {
+            moves.add(new int[]{newRow, newCol});
+        }
+
+        // LEFT
+        newRow = curRow;
+        newCol = curCol - 1;
+        if (newCol >= 0 && island[newRow][newCol] != 2 && island[newRow][newCol] != 3) {
+            moves.add(new int[]{newRow, newCol});
+        }
+
+        // RIGHT
+        newRow = curRow;
+        newCol = curCol + 1;
+        if (newCol < island[0].length && island[newRow][newCol] != 2 && island[newRow][newCol] != 3) {
+            moves.add(new int[]{newRow, newCol});
+        }
+
+        return moves;
+    }
 }
